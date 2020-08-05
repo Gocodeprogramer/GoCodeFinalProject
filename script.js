@@ -36,9 +36,15 @@ selectionButtons.forEach(selectionButton => {
 
 function makeSelection(selection) { 
     const computerSelection = randomSelection()
-    const yourWinner = isWinner(selection, computerSelection)
+    const yourWinner = isWinner(selection, computerSelection);
     const computerWinner = isWinner(selection, yourWinner)
     console.log(computerSelection)
+
+    addSelectionResult(computerSelection, computerWinner)
+    addSelectionResult(selection, yourWinner)
+
+    if (yourWinner)incrementScore(yourScoreSpan)
+    if (computerWinner)incrementScore(computerScoreSpan)
     
 }
 function incrementScore(scoreSpan) {
@@ -46,17 +52,12 @@ function incrementScore(scoreSpan) {
 }
 
 
-if (yourWinner)incrementScore(yourScoreSpan)
-if (computerWinner)incrementScore(computerScoreSpan)
 
 
-
-addSelectionResult(computerWinner, computerSelection)
-addSelectionResult(selection, yourWinner)
 
 function addSelectionResult(selection, winner) {
     const div = document.createElement('div')
-    div.innerText = selection.emoji
+    div.innerText = (selection.emoji)
     div.classList.add('result-selection')
     if (winner) div.classList.add('winner') 
     finalColumn.after(div)   
@@ -65,7 +66,7 @@ function addSelectionResult(selection, winner) {
 
 
 function isWinner(selection, opponentSelection) {
-    return selection.beats === opponentSelection.name
+    return selection.beats === opponentSelection.name;
 }
 
 function randomSelection() {
